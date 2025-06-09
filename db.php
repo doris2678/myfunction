@@ -1,43 +1,43 @@
-<?php
+<?php 
 $dsn="mysql:host=localhost;dbname=store;charset=utf8";
 $pdo=new PDO($dsn,'root','');
 
-function all($table,$where=null){
-  //echo "回傳指定資料表{$table}內容";  
-  global $pdo;
-  $sql="select * from $table $where";
-  echo $sql;
-  $rows=$pdo->query($sql)->fetchALl(PDO::FETCH_ASSOC);  
-  return $rows;
+/* all($table);
+all($table,$array=[]);
+all($table,$array,$str);
+all($table,$str); */
+
+function all($table,$array=null,$str=null){
+    global $pdo;
+   
+    $sql="SELECT * FROM $table ";
+
+        if(is_array($array)){
+            $tmp=array2sql($array);
+            $sql = $sql ." WHERE ".join(" AND ", $tmp);
+        }else{
+            $sql .= $array;
+        }
+
+        $sql .= $str;
+ 
+    echo $sql;
+    $rows=$pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    return $rows;
+
 }
 
 function dd($array){
     echo "<pre>";
-    print_r($array);   
+    print_r($array);
     echo "</pre>";
 }
-
-// function find($table,$id){
-//   global $pdo;
-//   $sql="select * from $table where id=$id";
-//   echo $sql;
-//   return $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);    
-// }
-
-function q($sql){
-  global $pdo;  
-  return $pdo->query($sql)->fetchALl(PDO::FETCH_ASSOC);  
-}
-
 
 function find($table,$id){
     global $pdo;
 
     if(is_array($id)){
-        $tmp=[];
-        foreach($id as $key=>$value){
-            $tmp[]="`$key`='$value'";
-        }
+        $tmp=array2sql($id);
         $sql="SELECT * FROM $table WHERE ".join(" AND ",$tmp);
     }else{
         $sql="SELECT * FROM $table WHERE id='$id'";
@@ -50,23 +50,21 @@ function find($table,$id){
 
 function update($table,$data){
     global $pdo;
-    $tmp=[];
-        foreach($data as $key=>$value){
-            if($key!='id'){
-                $tmp[]="`$key`='$value'";
-            }
-        }
+    $tmp=array2sql($data);
+
     $sql="UPDATE $table SET ".join(" , ",$tmp)."
-                      WHERE id='{$data['id']}'";    
-    echo $sql;
+                      WHERE id='{$data['id']}'";
+    
+     echo $sql;
     return $pdo->exec($sql);
+
 }
 
 function insert($table,$data){
-    global $pdo; 
+    global $pdo;
     $keys=array_keys($data);
 
-    $sql="insert into $table (`".join("`,`",$keys)."`) values('".join("','",$data)."');";
+    $sql="INSERT INTO $table (`".join("`,`",$keys)."`) values('".join("','",$data)."');";
     echo $sql;
     return $pdo->exec($sql);
 }
@@ -76,7 +74,38 @@ function save($table,$data){
         update($table,$data);
     }else{
         insert($table,$data);
-    } 
+    }
 }
 
-?>
+function array2sql($array){
+    $tmp=[];
+    foreach($array as $key=>$value){
+        $tmp[]="`$key`='$value'";
+    }
+
+    return $tmp;
+}
+
+function q($sql){
+    global $pdo;
+
+    return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    
+}
+
+
+function del($table,$id){
+    global $pdo;
+    $sql="delete from $table where ";
+
+    if(is_array($id)){
+        $tmp=array2sql($id);
+        $sql .= join(" AND ",$tmp);
+    }else{
+        $sql .= "id='$id'";
+    }
+
+    echo  $sql;
+
+    return $pdo->exec($sql);
+}

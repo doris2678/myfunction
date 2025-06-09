@@ -1,6 +1,5 @@
-<?php //include 'library.php'; ?>
+<?php // include 'library.php'; ?>
 <?php include 'db.php'; ?>
-
 <h2>正三角形</h2>
 <style>
     *{
@@ -8,14 +7,16 @@
     }
 </style>
 <?php
-// stars('正三角形', 15);
-// stars('菱形', 15);
-// stars('矩形', 15);
-// stars('倒三角形', 15);
 
-/* $rows= all('sales');
-dd($rows);
-
+ //$rows= all('sales');
+ //dd($rows);
+ //$rows= all('sales'," where quantity >=2");
+ //dd($rows);
+ //$rows= all('sales',['quantity'=>2]);
+//dd($rows);
+ $rows= all('sales',['quantity'=>2],' Order by id desc');
+ dd($rows);
+/*
 $sales=all('sales'," where quantity >=2");
 dd($sales);
 
@@ -23,27 +24,29 @@ $all=q("select name ,price from items order by price");
 dd($all); */
 
 //dd(find('items',3));
-//dd(find('items',['name'=>'蛋餅','stock'=>'50']));
+//dd(find('items',['name'=>'蛋餅','stock'=>50]));
 
-// $row=find('items',5);
-// dd($row);
-// $row['cost']=15;
-// $row['price']=55;
-// dd($row);
-// update("items", $row);
+/* stars('正三角形', 15);
+stars('菱形', 15);
+stars('矩形', 15);
+stars('倒三角形', 15); */
 
+/* $row=find('items',5);
+dd($row);
 
-// $data=['name'=>'豬排鐵板麵',
-//        'cost'=>50,
-//        'stock'=>100,
-//        'price'=>75];
+$row['cost']=15;
+$row['price']=45;
 
-//insert('items',$data);        
+dd($row);
 
-$data=['id'=>12,
-       'name'=>'豬排鐵板麵',
-       'cost'=>50,
-       'stock'=>100,
-       'price'=>90];
+update("items", $row); */
 
-save('items',$data);        
+/* $data=['id'=>14,
+        'name'=>'豬排鐵板麵加蛋',
+       'cost'=>75,
+       'stock'=>30,
+       'price'=>105];
+save('items',$data); */
+
+//del('items',5); 
+del('items',['cost'=>50]); 
