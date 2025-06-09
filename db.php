@@ -57,12 +57,26 @@ function update($table,$data){
             }
         }
     $sql="UPDATE $table SET ".join(" , ",$tmp)."
-                      WHERE id='{$data['id']}'";
-    
-     echo $sql;
-     return $pdo->exec($sql);
+                      WHERE id='{$data['id']}'";    
+    echo $sql;
+    return $pdo->exec($sql);
 }
 
+function insert($table,$data){
+    global $pdo; 
+    $keys=array_keys($data);
 
+    $sql="insert into $table (`".join("`,`",$keys)."`) values('".join("','",$data)."');";
+    echo $sql;
+    return $pdo->exec($sql);
+}
+
+function save($table,$data){
+    if(isset($data['id'])){
+        update($table,$data);
+    }else{
+        insert($table,$data);
+    } 
+}
 
 ?>
