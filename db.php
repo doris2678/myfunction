@@ -158,3 +158,14 @@ function q($sql){
     return $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     
 }
+
+
+function mysum($table,$str){
+    global $pdo;
+
+    $sql="SELECT sum(" .$str. ") FROM $table";
+
+    echo  $sql;
+
+    return $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+}

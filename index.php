@@ -48,4 +48,6 @@ update("items", $row); */
        'price'=>105];
 save('items',$data); */
 
-del('items', ['cost'=>40]);
+//del('items', ['cost'=>40]);
+$row=mysum('items','price');
+dd($row);
