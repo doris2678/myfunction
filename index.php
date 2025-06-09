@@ -13,9 +13,9 @@
  //$rows= all('sales'," where quantity >=2");
  //dd($rows);
  //$rows= all('sales',['quantity'=>2]);
-//dd($rows);
- $rows= all('sales',['quantity'=>2],' Order by id desc');
- dd($rows);
+ //dd($rows);
+/*  $rows= all('sales',['quantity'=>2],' Order by id desc');
+ dd($rows); */
 /*
 $sales=all('sales'," where quantity >=2");
 dd($sales);
@@ -48,5 +48,4 @@ update("items", $row); */
        'price'=>105];
 save('items',$data); */
 
-//del('items',5); 
-del('items',['cost'=>50]); 
+del('items', ['cost'=>40]);
