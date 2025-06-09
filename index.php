@@ -49,5 +49,13 @@ update("items", $row); */
 save('items',$data); */
 
 //del('items', ['cost'=>40]);
-$row=mysum('items','price');
-dd($row);
+
+//test
+// $row=mysum('items','sum','price');
+// dd($row);
+// $row=mysum('items','avg','price');
+// dd($row);
+// $row=mysum('items','min','price');
+// dd($row);
+// $row=mysum('items','max','price');
+// dd($row);

@@ -160,12 +160,14 @@ function q($sql){
 }
 
 
-function mysum($table,$str){
-    global $pdo;
+// function mysum($table,$type,$str){
+//     global $pdo;
 
-    $sql="SELECT sum(" .$str. ") FROM $table";
-
-    echo  $sql;
-
-    return $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
-}
+//     //$sql="SELECT sum(" .$str. ") FROM $table";
+//     $sql="SELECT ".$type."(" .$str. ") FROM $table";
+    
+//     echo  $sql;
+//     echo "<br>";
+//     return $pdo->query($sql)->fetch(PDO::FETCH_ASSOC);    
+//     echo "<br>";
+// }
