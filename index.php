@@ -1,4 +1,6 @@
-<?php include 'library.php'; ?>
+<?php //include 'library.php'; ?>
+<?php include 'db.php'; ?>
+
 <h2>正三角形</h2>
 <style>
     *{
@@ -6,11 +8,25 @@
     }
 </style>
 <?php
+// stars('正三角形', 15);
+// stars('菱形', 15);
+// stars('矩形', 15);
+// stars('倒三角形', 15);
 
+// $rows= all('sales');
+// dd($rows);
 
-stars('正三角形', 15);
-stars('菱形', 15);
-stars('矩形', 15);
-stars('倒三角形', 15);
+// $sales=all('sales'," where quantity>=2");
+// dd($sales);
+
+// $rows=q('select name,price from items order by price');
+// dd($rows);
+
+//dd($rows=find('items',"3"));
+
+//dd($rows=find('items',"3"));
+
+dd($rows=findacc('members',"doris","1234"));
+
 
 
