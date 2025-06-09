@@ -13,20 +13,21 @@
 // stars('矩形', 15);
 // stars('倒三角形', 15);
 
-// $rows= all('sales');
-// dd($rows);
+/* $rows= all('sales');
+dd($rows);
 
-// $sales=all('sales'," where quantity>=2");
-// dd($sales);
+$sales=all('sales'," where quantity >=2");
+dd($sales);
 
-// $rows=q('select name,price from items order by price');
-// dd($rows);
+$all=q("select name ,price from items order by price");
+dd($all); */
 
-//dd($rows=find('items',"3"));
+//dd(find('items',3));
+//dd(find('items',['name'=>'蛋餅','stock'=>'50']));
 
-//dd($rows=find('items',"3"));
-
-dd($rows=findacc('members',"doris","1234"));
-
-
-
+$row=find('items',5);
+dd($row);
+$row['cost']=15;
+$row['price']=55;
+dd($row);
+update("items", $row);
