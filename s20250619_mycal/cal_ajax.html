@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <form action="./data/store2.php" method="post" id="myForm">
+    <p>
+      <input type="number" id="num1" name="num1" value="10">
+    </p>
+    <p>
+      <input type="text" id="opt" name="opt" value="+">
+    </p>
+    <p>
+      <input type="number" id="num2" name="num2" value="5">
+    </p>
+    <p>
+      <input type="submit" value="submit">
+    </p>
+    <br>
+    <p id="resultP">
+    </p>
+
+  </form>
+  <!-- 載入jquery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    $(document).ready(function () {
+      myForm = $('#myForm');
+      resultP = $('#resultP');
+
+
+      myForm.submit(function (e) {
+        e.preventDefault();
+        console.log('e', e);
+        let confimred = confirm('是否送出?');
+        console.log('confimred', confimred);
+        if (!confimred) {
+          return false;
+        }
+        console.log('ok');
+
+        let url = "./data/store2.php"
+        let data = $(this).serializeArray();
+        console.log('data', data);
+
+        $.ajax({
+          type: "post",
+          url: url,
+          data: data,
+          dataType: "json",
+          success: function (response) {
+            console.log('response', response);            
+            tmpText = `計算結果:${response.result}`;            
+            resultP.text(tmpText);
+          }
+        });
+      });
+    });
+  </script>
+
+
+</body>
+
+</html>
