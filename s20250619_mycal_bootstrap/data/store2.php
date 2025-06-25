@@ -26,5 +26,4 @@ $result=0;
 
 $input['result']=$result;
 echo json_encode($input);
-
 ?>
