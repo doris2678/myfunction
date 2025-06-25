@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>簡易計算機</title>
+  <!-- 載入bs5 css -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/css/bootstrap.min.css"
+    integrity="sha512-fw7f+TcMjTb7bpbLJZlP8g2Y4XcCyFZW8uy8HsRZsH/SwbMw0plKHFHr99DN3l04VsYNwvzicUX/6qurvIxbxw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    .container,
+    .btnCt,
+    h1,
+    p {
+      width: 50%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: auto;
+      margin-top: 50px;
+    }
+
+    #myBtn {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>簡易計算機</h1>
+  <div class="container-fluid text-center mt-3">
+    <div class="row">
+      <div class="col">
+        <div class="box">
+          <form action="./data/store2.php" method="post" id="myForm">
+            <p>
+              <input type="number" id="num1" name="num1" value="10">
+            </p>
+            <p>
+              <input type="text" id="opt" name="opt" value="+">
+            </p>
+            <p>
+              <input type="number" id="num2" name="num2" value="5">
+            </p>
+            <p>
+              <input type="submit"  id="myBtn" value="開始計算">
+            </p>
+            <br>
+            <p id="resultP">
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- 載入jquery -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+    integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    $(document).ready(function () {
+      myForm = $('#myForm');
+      resultP = $('#resultP');
+
+
+      myForm.submit(function (e) {
+        e.preventDefault();
+        console.log('e', e);
+        let confimred = confirm('是否送出?');
+        console.log('confimred', confimred);
+        if (!confimred) {
+          return false;
+        }
+        console.log('ok');
+
+        let url = "./data/store2.php"
+        let data = $(this).serializeArray();
+        console.log('data', data);
+
+        $.ajax({
+          type: "post",
+          url: url,
+          data: data,
+          dataType: "json",
+          success: function (response) {
+            console.log('response', response);
+            tmpText = `計算結果:${response.result}`;
+            resultP.text(tmpText);
+          }
+        });
+      });
+    });
+  </script>
+
+  <!-- 載入bs5 js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/js/bootstrap.min.js"
+    integrity="sha512-zKeerWHHuP3ar7kX2WKBSENzb+GJytFSBL6HrR2nPSR1kOX1qjm+oHooQtbDpDBSITgyl7QXZApvDfDWvKjkUw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</body>
+
+</html>
